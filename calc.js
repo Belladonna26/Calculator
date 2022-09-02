@@ -1,11 +1,12 @@
 let a = "";
 let b = "";
+let c = "";
 let sign = "";
 let finish = false;
 let reset = document.querySelector(".calculator__button_reset");
 let buttons = document.querySelector(".calculator__buttons");
 
-const digit = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "%"];
+const digit = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
 const action = ["+", "-", "X", "/", "neg", "%"];
 const out = document.querySelector(".calculator__input");
 
@@ -26,28 +27,44 @@ buttons.addEventListener("click", (event) => {
     const key = event.target.value;
 
     if(digit.includes(key)) {
-         //отсюда норм код
          if(b === "" && sign === "") {
             a += key;
-            out.value = a; //до сюда номр код
-        }
-         else if(a !== "" && b !== "" && finish) {
-         b = key;
-         finish = false;
-         out.value = b;
-         //try
-        } 
-        else {
-         b += key;
-         out.value = b;
+            out.value = a; 
+        } else if(a !== "" && b !== "" && finish) {
+          b = key;
+          finish = false;
+          out.value = b;
+        } else {
+          b += key;
+          out.value = b;
         }
         return;
     }
     if(action.includes(key)) {
         sign = key;
+        if(sign === "neg") {
+         a = Number(a * (-1));
+         out.value = a;
+         // console.log(typeof(a))
+         return;
+        } else {
         out.value = sign;
         return;
+        }
     }
+
+   //  if(key === "-" && a === "") {
+   //    if ((key ==="+")) {
+   //       a = Number(a * (-1));
+   //       // a = Number(a + b);
+   //       out.value = a;
+   //    }   
+   //    // else {
+   //    //    a = Number(a - b);
+   //    //    out.value = a;
+   //    //   }
+   //      return;
+   //  }
 
     if(key === "=") {
         if(b === "") b = a;
@@ -71,9 +88,12 @@ buttons.addEventListener("click", (event) => {
             }
             a = a / b;
             break;
-        //  case "%":
-        //         a = (a * b) / 100;
-        //         break;
+         case "%":
+            a = (a * b) / 100;
+            break;
+         case "neg":
+            a = a * (-1);
+            break;
         }
         finish = true;
         out.value = a;

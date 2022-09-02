@@ -25,6 +25,10 @@
     font-size: 100px;
 }
 
+.calculator__input:focus {
+    outline: none;
+}
+
 .calculator__input::-webkit-outer-spin-button,
 .calculator__input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -71,7 +75,8 @@
     border: grey;
 }
 
-.calculator__button_grey:hover {
+.calculator__button_grey:hover,
+.calculator__button_grey:focus {
     background-color: rgb(190, 184, 184);
     border: rgb(190, 184, 184);
 }
@@ -101,7 +106,8 @@
     border: orange;
 }
 
-.calculator__button_orange:hover {
+.calculator__button_orange:hover,
+.calculator__button_orange:focus {
     background-color: rgb(244, 223, 32);
     border: rgb(244, 223, 32);
 }
